@@ -144,7 +144,7 @@ portfolio/
 
 ## 🔗 Live Demo
 
-[**View Portfolio**](https://yourusername.github.io/portfolio)
+[**View Portfolio**](https://siyran.github.io/Portfolio/)
 *(Replace with your actual GitHub Pages URL)*
 
 ---
