@@ -1,124 +1,127 @@
+```
+# Responsive Portfolio Website — Abrar Ahmad
 
-```markdown
-# 🌐 Responsive Portfolio Website — Abrar Ahmad
-
-A **modern, fully responsive portfolio website** built with **HTML, CSS, and JavaScript**, designed to present my professional background as an **AI Engineer, Developer, and Designer**.  
-The site showcases my AI projects, experience, certifications, and testimonials in a dynamic and elegant single-page layout.
-
----
-
-## 🧭 Overview
-
-This portfolio website is an interactive digital resume that highlights:
-- My **AI, ML, and development projects**
-- Educational background and work experience
-- Achievements and certifications from **Google, Oracle, DeepLearning.AI, Coursera, and Udemy**
-- **Testimonials** from professors and colleagues
-- A visually appealing **technology orbit animation**
-- Responsive design that works beautifully on all screen sizes
+A modern, fully responsive personal portfolio built with **HTML**, **CSS**, and **JavaScript** — designed to present projects, experience, certifications, and testimonials in an elegant single-page layout.  
+The website demonstrates a mix of technical expertise in **AI, Machine Learning, Web Development**, and **Creative Design**.
 
 ---
 
-## 🚀 Key Features
+## Overview
 
-### 🏠 **Home Section**
-- Dynamic **typewriter animation** introducing Abrar Ahmad  
-- Professional title: **AI Engineer & Developer**  
-- Interactive **LinkedIn** and **GitHub** links  
-- Responsive profile image and animated social icons  
+This portfolio is an interactive, single-page resume showcasing:
 
----
-
-### 👨‍💻 **About Section**
-- Highlights passion for **AI agents**, **RAG pipelines**, and **machine learning systems**  
-- Resume download button with direct PDF link  
-- Clean typography and modern gradient effects  
+- Artificial Intelligence and Machine Learning projects  
+- Work experience and educational background  
+- Verified certifications from **Google**, **Oracle**, **DeepLearning.AI**, **Coursera**, and **Udemy**  
+- Professional testimonials from professors and collaborators  
+- A dynamic 3D **Tech Orbit Animation** displaying tools and frameworks  
+- Responsive design adaptable across all screen sizes  
 
 ---
 
-### 💡 **Projects Section**
-A **swiper-powered carousel** featuring key AI projects:
-1. **Regional Text Recognition (OCR)** — Urdu text detection using CNNs  
-2. **Resume Analyzer + Gemini Chatbot** — AI-powered HR automation tool  
-3. **Brain Tumor Classification** — Deep learning model using student–teacher distillation  
-4. **WhatsApp Chatbot (IUST Admissions)** — Real-time query automation system  
-5. **IoT Monitoring & Disinfection System** — Sensor-based automation for public spaces  
+## Key Features
 
-Each project card includes:
-- Category labels (AI, ML, NLP, CV, etc.)  
-- Tech stack icons (Python, TensorFlow, Flask, etc.)  
-- Animated hover effects and GitHub/LinkedIn project links  
+### 🏠 Home
+- Typewriter animation introducing *Abrar Ahmad*  
+- Title: *AI Engineer & Developer*  
+- Social links to **LinkedIn** and **GitHub**  
+- Smooth hover animations and responsive layout  
 
----
+### 👨‍💻 About
+- Highlights interest in **AI Agents**, **RAG Pipelines**, and **Deep Learning Systems**  
+- Downloadable resume (PDF format)  
+- Clean and modern UI with structured content  
 
-### 🪐 **Orbit Animation**
-- A **rotating 3D orbit** of technologies built with pure **CSS keyframes**  
-- Displays tools like HTML, CSS, JavaScript, React, Node.js, Docker, TensorFlow, OpenCV, Photoshop, and more  
-- Inner and outer orbits rotate in opposite directions for a futuristic effect  
+### 💡 Projects
+Five key AI-driven and development-focused projects:
 
----
+1. **Regional Text Recognition (OCR)** – Urdu script recognition using CNNs  
+2. **Resume Analyzer + Gemini Chatbot** – LLM-based HR automation  
+3. **Brain Tumor Classification** – Efficient MRI classification via model distillation  
+4. **WhatsApp Admission Chatbot** – University query automation  
+5. **IoT Monitoring & Disinfection System** – Smart IoT monitoring system for public spaces  
 
-### 💼 **Work & Education Tabs**
-Interactive tabbed layout to toggle between:
-- **Work Experience** — roles from 2020–2025 (Fix Health, KCF, IIT Ropar, JKPDCL, etc.)  
-- **Education** — B.Tech in Electronics & Communication and M.Tech in Artificial Intelligence  
-
-Accessible with keyboard navigation and smooth transitions.
+Each project includes:
+- Project number, title, and concise description  
+- Technology logos (Python, TensorFlow, Flask, etc.)  
+- "View Project" links for GitHub or LinkedIn  
 
 ---
 
-### 🧠 **Services Section**
-Two service cards outlining what I offer:
-- **AI Engineer** — LLMs, RAG systems, agents, automation  
-- **Developer** — APIs, scalable backend, cloud integration  
-
-Includes tools like **Python, TensorFlow, Flask, FastAPI, Node.js, AWS, GCP**, etc.
+### 🪐 Tech Orbit
+- Animated **CSS-based orbit** visualizing 20+ technologies  
+- Includes HTML, CSS, JavaScript, React, Node.js, Docker, TensorFlow, OpenCV, Photoshop, and more  
+- Dual orbit rotation (inner + outer) with smooth motion  
 
 ---
 
-### 🏅 **Certifications Section**
-Beautifully styled **certification grid** featuring real logos and links:
-- 🧠 *Supervised Machine Learning* — Coursera (Andrew Ng)
-- 🐍 *Crash Course on Python* — Google
-- 💬 *AI Chatbots & Automation* — Udemy
-- ☁️ *OCI Generative AI Professional* — Oracle
-- 🖼️ *Adobe Photoshop CC* — LinkedIn Learning
-- 🤖 *Computer Vision using Python* — Udemy  
-Each card uses **Devicon icons** and responsive hover animations.
+### 💼 Work & Education
+Interactive tabbed section featuring:
+- **Experience:**  
+  - *Kashmir Care Foundation* — Content Manager  
+  - *Fix Health* — Technical Operations Executive  
+  - *IIT Ropar* — Smart Crop Sensor Intern  
+  - *University of Kashmir* — ML/DL Intern  
+- **Education:**  
+  - M.Tech in Artificial Intelligence — *Islamic University of Science & Technology*  
+  - B.Tech in Electronics & Communication — *IUST*  
 
 ---
 
-### 💬 **Testimonials Section**
-- Sliding testimonials using **Swiper.js**  
-- Real quotes from professors, collaborators, and colleagues  
-- Animated transitions and smooth pagination  
-- “View Email” button for direct contact  
+### 🧩 Services
+- **AI Engineer:**  
+  Building intelligent systems with LLMs, RAG, agents, and automation.  
+  *Skills:* Python, TensorFlow, PyTorch, LangChain, Gemini API, NLP, CV, Data Analysis  
+
+- **Developer:**  
+  Scalable applications using Flask, FastAPI, Node.js, and cloud tools.  
+  *Skills:* Flask, React, GitHub, AWS, GCP, Flutter  
 
 ---
 
-### 📞 **Contact Section**
-- “Write Me & We’ll Talk” call-to-action  
-- Direct **WhatsApp chat** link  
-- One-click **Copy Email** button with clipboard functionality  
-- Minimalist responsive layout  
+### 🏅 Certifications
+Attractive certification grid featuring logos and links:
+- *Supervised Machine Learning* — Coursera (Andrew Ng)  
+- *Crash Course on Python* — Google  
+- *OCI Generative AI Professional* — Oracle  
+- *AI-Powered Chatbots* — Udemy  
+- *Adobe Photoshop CC* — LinkedIn Learning  
+- *Computer Vision using Python* — Udemy  
 
 ---
 
-### 🧩 **Additional UI Enhancements**
-- ScrollReveal.js for entrance animations  
-- Swiper.js for carousels  
-- Anime.js for smooth motion effects  
-- Accessible keyboard navigation for all tabs  
-- Inline JavaScript for fast load and fewer dependencies  
+### 💬 Testimonials
+- Rotating testimonials built with **Swiper.js**  
+- Includes authentic feedback from professors, collaborators, and colleagues  
+- Smooth transitions and "View Email" buttons  
 
 ---
 
-## 🧱 Project Structure
+### 📞 Contact
+- One-click **WhatsApp** chat integration  
+- **Copy Email** button with clipboard functionality  
+- Footer includes credits and copyright  
+
+---
+
+## Technologies Used
+
+| Category | Tools |
+|-----------|-------|
+| **Frontend** | HTML5, CSS3, JavaScript |
+| **UI & Icons** | Devicon, Remix Icons |
+| **Animations** | Swiper.js, ScrollReveal.js, Anime.js |
+| **AI Tools Featured** | Python, TensorFlow, OpenCV, Flask, LangChain |
+| **Design Tools** | Figma, Photoshop, Illustrator, Canva |
+| **Hosting** | GitHub Pages |
+
+---
+
+## Folder Structure
 
 ```
 
 portfolio/
-│
 ├── index.html
 ├── assets/
 │   ├── css/
@@ -135,46 +138,30 @@ portfolio/
 │       └── Abrar_Ahmad_Resume.pdf
 └── README.md
 
-````
-
----
-
-## 🧰 Technologies Used
-
-| Category | Technologies |
-|-----------|---------------|
-| **Frontend** | HTML5, CSS3, JavaScript |
-| **Frameworks / Libraries** | Swiper.js, ScrollReveal.js, Anime.js |
-| **UI / Icons** | Remix Icons, Devicon |
-| **Design Tools** | Figma, Photoshop, Illustrator, Canva |
-| **AI Tools Featured** | Python, TensorFlow, OpenCV, Flask, LangChain |
-| **Hosting** | GitHub Pages |
-
----
-
-## 🌍 Live Demo
-
-🔗 **[View Portfolio](https://yourusername.github.io/portfolio)**
-*(Replace with your GitHub Pages URL)*
-
----
-
-## 👨‍💻 Author
-
-**Abrar Ahmad**
-AI Engineer | Developer | Designer
-📧 [abrarsiyran@gmail.com](mailto:abrarsiyran@gmail.com)
-🔗 [LinkedIn](https://www.linkedin.com/in/siyran-shafi) • [GitHub](https://github.com/Siyran)
-
----
-
-### ❤️ Built with Passion for AI, Design & Web Development
-
-> “Innovation drives my work — turning data into vision.”
-
 ```
 
 ---
 
-Would you like me to create a **shorter, one-page summary version** of this README (for GitHub Pages or LinkedIn portfolio repos) that focuses on the visual sections and links only?
+## Live Demo
+
+🔗 [View Portfolio](https://yourusername.github.io/portfolio)  
+*(Replace with your GitHub Pages URL)*
+
+---
+
+## Contact
+
+**Abrar Ahmad**  
+AI Engineer • Developer • Designer  
+📧 [abrarsiyran@gmail.com](mailto:abrarsiyran@gmail.com)  
+🔗 [LinkedIn](https://www.linkedin.com/in/siyran-shafi) | [GitHub](https://github.com/Siyran)
+
+---
+
+### License
+This project is open-source and available under the **MIT License**.
+
+---
+
+> *“Innovation drives my work — turning data into vision.”*
 ```
