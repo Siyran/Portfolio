@@ -1,0 +1,1863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!--=============== FAVICON ===============-->
+  <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+
+  <!--=============== REMIXICONS ===============-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+
+  <!--=============== DEVICON (brand logos) ===============-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+
+  <!--=============== SWIPER CSS ===============-->
+  <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
+
+  <!--=============== CSS ===============-->
+  <link rel="stylesheet" href="assets/css/styles.css">
+
+  <title>Responsive portfolio website — Abrar Ahmad</title>
+
+  <!--======== QUICK LAYOUT FIXES / ENHANCEMENTS ========-->
+  <style>
+     html, body {
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+    /* Prevent hidden tab content from affecting layout */
+    .work__panel[hidden] { display: none !important; }
+
+    /* Tabs focus/selection clarity */
+    .work__tabs { display: flex; gap: .75rem; flex-wrap: wrap; align-items: center; }
+    .work__button[aria-selected="true"] { outline: 2px solid rgba(147, 51, 234, .85); }
+
+    /* ---------- Projects alignment ---------- */
+    .projects .swiper { padding: 0 2.5rem 3.5rem; }
+    .projects__card {
+      display: flex; flex-direction: column; height: 100%;
+      border-radius: 1.25rem; padding: 1.5rem;
+      background: rgba(255,255,255,0.04); box-shadow: 0 12px 40px rgba(0,0,0,.25);
+    }
+    .projects__card .projects__cta { margin-top: auto; }
+    .swiper-slide { height: auto; }
+    .projects__number { color: #a78bfa; font-weight: 800; letter-spacing: .05em; }
+
+    /* Swiper arrows — centered, not clipped */
+    .projects .swiper-button-prev, .projects .swiper-button-next,
+    .testimonials .swiper-button-prev, .testimonials .swiper-button-next {
+      top: 50%; transform: translateY(-50%);
+      width: 40px; height: 40px; border-radius: 999px;
+      background: rgba(59,130,246,.15); backdrop-filter: blur(4px);
+      display: grid; place-items: center;
+    }
+    .projects .swiper-button-prev::after,
+    .projects .swiper-button-next::after,
+    .testimonials .swiper-button-prev::after,
+    .testimonials .swiper-button-next::after { display: none; }
+    .projects .swiper-button-prev i, .projects .swiper-button-next i,
+    .testimonials .swiper-button-prev i, .testimonials .swiper-button-next i {
+      font-size: 22px; color: #3b82f6; margin: 0;
+    }
+    .projects .swiper-button-prev { left: .25rem; }
+    .projects .swiper-button-next { right: .25rem; }
+
+    /* ---------- Certifications grid with real logos ---------- */
+    .certs__grid {
+      display: grid; gap: 1.25rem;
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+    @media (min-width: 640px) { .certs__grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+    @media (min-width: 1024px) { .certs__grid { grid-template-columns: repeat(3, minmax(0,1fr)); } }
+    @media (min-width: 1280px) { .certs__grid { grid-template-columns: repeat(4, minmax(0,1fr)); } }
+
+    .cert__card {
+      display: flex; flex-direction: column; gap: .75rem;
+      padding: 1.25rem; border-radius: 1rem;
+      background: rgba(255,255,255,0.04);
+      box-shadow: 0 10px 30px rgba(0,0,0,.2);
+      height: 100%; position: relative; overflow: hidden;
+    }
+
+    .cert__row { display: flex; align-items: center; gap: .6rem; }
+    .cert__icon {
+      width: 28px; height: 28px; border-radius: 8px;
+      display: grid; place-items: center; background: rgba(255,255,255,.06);
+      flex: 0 0 28px;
+    }
+    .cert__icon i { font-size: 18px; line-height: 1; }  /* small title icon */
+    .cert__title { margin: 0; font-weight: 800; line-height: 1.25; }
+
+    .cert__badges {
+      display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .15rem;
+    }
+    .cert__badge {
+      display: inline-flex; align-items: center; gap: .35rem;
+      padding: .28rem .5rem; border-radius: .5rem;
+      background: rgba(255,255,255,.06);
+      font-size: .84rem; line-height: 1;
+    }
+    .cert__badge i { font-size: 16px; line-height: 1; } /* tiny badge icon */
+
+    .cert__actions { margin-top: auto; }
+    .cert__actions .button__ghost { width: fit-content; }
+
+    /* Keep everything inside the card */
+    .cert__card * { max-width: 100%; }
+  </style>
+</head>
+<body>
+  <!--==================== HEADER ====================-->
+  <header class="header" id="header">
+    <nav class="nav container">
+      <a href="#" class="nav__logo">Abrar</a>
+
+      <div class="nav__menu" id="nav-menu">
+        <ul class="nav__list">
+          <li class="nav__item"><a href="#home" class="nav__link">Home</a></li>
+          <li class="nav__item"><a href="#about" class="nav__link">About Me</a></li>
+          <li class="nav__item"><a href="#projects" class="nav__link">Projects</a></li>
+          <li class="nav__item"><a href="#work" class="nav__link">Work</a></li>
+          <li class="nav__item"><a href="#certifications" class="nav__link">Certifications</a></li>
+          <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="nav__actions">
+        <a href="#contact" class="button button__ghost">Hire Me</a>
+        <div class="nav__toggle" id="nav-toggle"><i class="ri-menu-3-line"></i></div>
+      </div>
+    </nav>
+  </header>
+
+  <!--==================== MAIN ====================-->
+  <main class="main">
+    <!--==================== HOME ====================-->
+    <section class="home section" id="home">
+  <style>
+    /* ===== Name Styling ===== */
+    .home__name {
+      color: #a78bfa; /* Default purple */
+      transition: all 0.4s ease;
+      display: inline-block;
+      cursor: pointer;
+    }
+
+    .home__name:hover {
+      color: #ffffff; /* Turns white */
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.9),
+                   0 0 20px rgba(255, 255, 255, 0.7),
+                   0 0 35px rgba(255, 255, 255, 0.5);
+      transform: scale(1.04);
+    }
+
+    /* ===== Social Icons ===== */
+    .home__social {
+      display: flex;
+      gap: 1.2rem;
+      margin-top: 1.8rem;
+    }
+
+    .home__social-link {
+      font-size: 2rem; /* Increased size */
+      color: #a5a5a5;
+      transition: all 0.3s ease;
+    }
+
+    .home__social-link:hover {
+      color: #a78bfa;
+      transform: scale(1.2);
+      text-shadow: 0 0 10px rgba(167, 139, 250, 0.6);
+    }
+
+    /* Optional: For smaller screens */
+    @media (max-width: 768px) {
+      .home__social-link {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+
+  <div class="home__container container grid">
+    <div class="home__data">
+      <p class="home__greeting">Hello, I'm</p>
+
+      <h1 class="home__name">Abrar <br> Ahmad</h1>
+
+      <p class="home__split">Innovative</p>
+
+      <h2 class="home__profession">
+        <span class="home__profession-1">AI Engineer</span>
+        <span class="home__profession-2">&amp; Developer</span>
+      </h2>
+
+      <p class="home__roles">
+        <span id="home-rotating" class="typewriter"></span>
+      </p>
+
+      <div class="home__social">
+        <a href="https://www.linkedin.com/in/siyran-shafi" class="home__social-link" target="_blank" rel="noreferrer">
+          <i class="ri-linkedin-box-fill"></i>
+        </a>
+        <a href="https://github.com/Siyran" class="home__social-link" target="_blank" rel="noreferrer">
+          <i class="ri-github-fill"></i>
+        </a>
+      </div>
+    </div>
+
+    <div class="home__image">
+      <img src="assets/img/home-perfil.png" alt="Abrar Ahmad">
+    </div>
+  </div>
+</section>
+
+
+    <!--==================== ABOUT ====================-->
+    <section class="about section" id="about">
+      <div class="about__container container grid">
+        <div class="about__data">
+          <h2 class="section__title">
+            <span>Innovation</span> <br> Drives My Work
+          </h2>
+
+          <p class="about__description">
+            I'm an <b>AI Engineer and Developer</b> passionate about creating <b>autonomous AI agents</b>,
+            <b>RAG pipelines</b>, intelligent chatbots, and ML/DL models that make a real-world impact.
+            I thrive on <b>experimentation</b>, <b>scalable design</b>, and turning ideas into production-ready systems.
+          </p>
+
+          <a href="assets/docs/Abrar_Ahmad_Resume.pdf" class="button" download>Resume</a>
+        </div>
+      </div>
+    </section>
+
+    <!--==================== PROJECTS ====================-->
+   <!--==================== PROJECTS ====================-->
+<section class="projects section" id="projects">
+  <style>
+    /* ===== Outer Frame ===== */
+    .projects__outer {
+      width: 90%;
+      max-width: 1180px;
+      margin: 0 auto;
+      border: 1px solid rgba(167, 139, 250, 0.25);
+      border-radius: 1.2rem;
+      padding: 2rem 1.5rem;
+      background: rgba(17, 18, 20, 0.92);
+      backdrop-filter: blur(6px);
+      position: relative;
+      z-index: 5;
+      overflow: hidden;
+    }
+
+    /* ===== Swiper Container ===== */
+    .projects__container {
+      margin-top: 1.5rem;
+      overflow: visible !important;
+      padding-bottom: 2rem;
+    }
+
+    .swiper {
+      overflow: visible !important;
+    }
+
+    .swiper-slide {
+      height: auto !important;
+      flex-shrink: 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* ===== Card ===== */
+    .projects__card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-start;
+      background: #111214;
+      border-radius: 1rem;
+      padding: 1.8rem 1.5rem;
+      transition: all 0.3s ease;
+      color: #fff;
+      min-height: 370px;
+      width: 290px;
+      box-sizing: border-box;
+    }
+
+    .projects__card:hover {
+      border: 1px solid #a78bfa;
+      box-shadow: 0 0 20px rgba(167, 139, 250, 0.4);
+      transform: translateY(-6px);
+      z-index: 10;
+    }
+
+    /* ===== Text Hierarchy ===== */
+    .projects__number {
+      color: #a78bfa;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .projects__title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      line-height: 1.4;
+      margin-bottom: 0.4rem;
+    }
+
+    .projects__subtitle {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #a5a5a5;
+      margin-bottom: 0.8rem;
+    }
+
+    .projects__description {
+      font-size: 0.85rem;
+      line-height: 1.45;
+      color: #ccc;
+      margin-bottom: 1rem;
+      flex-grow: 1;
+    }
+
+    /* ===== Tech Logos Row ===== */
+    .projects__tech {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: auto;
+      margin-bottom: 1rem;
+    }
+
+    .projects__tech i {
+      font-size: 1.3rem;
+      opacity: 0.9;
+    }
+
+    /* ===== Button ===== */
+    .projects__cta a {
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 0.35rem 0.9rem;
+      border-radius: 0.4rem;
+      border: 1px solid #a78bfa;
+      color: #a78bfa;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .projects__cta a:hover {
+      background: #a78bfa;
+      color: #111214;
+      transform: scale(1.05);
+      box-shadow: 0 0 8px rgba(167, 139, 250, 0.4);
+    }
+
+    /* ===== Swiper Arrows ===== */
+    .swiper-button-prev,
+    .swiper-button-next {
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 50%;
+      width: 35px;
+      height: 35px;
+    }
+
+    .swiper-button-prev {
+      left: 8px;
+    }
+
+    .swiper-button-next {
+      right: 8px;
+    }
+
+    .swiper-button-prev::after,
+    .swiper-button-next::after {
+      font-size: 16px;
+      color: #a78bfa;
+    }
+
+    /* ===== Section Title ===== */
+    .section__title {
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+      font-weight: 800;
+    }
+
+    .section__title span {
+      color: #a78bfa;
+    }
+  </style>
+
+  <div class="projects__outer">
+    <div class="container">
+      <h2 class="section__title">
+        I Build Intelligent <br> <span>AI Systems</span>
+      </h2>
+
+      <div class="projects__container swiper">
+        <div class="swiper-wrapper">
+
+          <!-- Project 01 -->
+          <article class="projects__card swiper-slide" onclick="window.open('https://github.com/Siyran/Urdu-Text-Recognition','_blank')" style="cursor:pointer;">
+            <span class="projects__number">01</span>
+            <h3 class="projects__title">Regional Text Recognition</h3>
+            <p class="projects__subtitle">AI / OCR</p>
+            <p class="projects__description">OCR pipeline for Urdu script using CNNs &amp; preprocessing — enhancing multilingual document accessibility.</p>
+            <div class="projects__tech">
+              <i class="devicon-python-plain colored"></i>
+              <i class="devicon-tensorflow-original colored"></i>
+              <i class="devicon-opencv-plain colored"></i>
+              <i class="ri-cpu-line"></i>
+            </div>
+            <p class="projects__cta"><a href="https://github.com/Siyran/Urdu-Text-Recognition" target="_blank">View Project</a></p>
+          </article>
+
+          <!-- Project 02 -->
+          <article class="projects__card swiper-slide" onclick="window.open('https://github.com/Siyran/Resume-Analyzer-AI-Powered-Screening','_blank')" style="cursor:pointer;">
+            <span class="projects__number">02</span>
+            <h3 class="projects__title">Resume Analyzer + Gemini Chatbot</h3>
+            <p class="projects__subtitle">AI / Automation</p>
+            <p class="projects__description">HR automation: LLM (Gemini) + NLP for parsing, scoring, and interactive candidate screening.</p>
+            <div class="projects__tech">
+              <i class="devicon-python-plain colored"></i>
+              <i class="devicon-flask-original colored"></i>
+              <i class="ri-links-line"></i>
+              <i class="ri-robot-2-line"></i>
+            </div>
+            <p class="projects__cta"><a href="https://github.com/Siyran/Resume-Analyzer-AI-Powered-Screening" target="_blank">View Project</a></p>
+          </article>
+
+          <!-- Project 03 -->
+          <article class="projects__card swiper-slide" onclick="window.open('https://github.com/Siyran/Brain-Tumor-Classification-','_blank')" style="cursor:pointer;">
+            <span class="projects__number">03</span>
+            <h3 class="projects__title">Brain Tumor Classification</h3>
+            <p class="projects__subtitle">ML / Distillation</p>
+            <p class="projects__description">Student–Teacher architecture for efficient MRI tumor detection with optimized inference latency.</p>
+            <div class="projects__tech">
+              <i class="devicon-pytorch-original colored"></i>
+              <i class="devicon-python-plain colored"></i>
+              <i class="ri-cpu-line"></i>
+            </div>
+            <p class="projects__cta"><a href="https://github.com/Siyran/Brain-Tumor-Classification-" target="_blank">View Project</a></p>
+          </article>
+
+          <!-- Project 04 -->
+          <article class="projects__card swiper-slide" onclick="window.open('https://www.linkedin.com/posts/siyran-shafi_chatbotdevelopment-interakt-whatsappbusiness-activity-7333025583414595584-wQ7o','_blank')" style="cursor:pointer;">
+            <span class="projects__number">04</span>
+            <h3 class="projects__title">IUST Admission Queries Chatbot</h3>
+            <p class="projects__subtitle">Chatbot / WhatsApp</p>
+            <p class="projects__description">WhatsApp-integrated chatbot to automate university admission FAQs and responses.</p>
+            <div class="projects__tech">
+              <i class="devicon-flask-original colored"></i>
+              <i class="devicon-python-plain colored"></i>
+              <i class="ri-whatsapp-line"></i>
+              <i class="ri-message-2-line"></i>
+            </div>
+            <p class="projects__cta"><a href="https://www.linkedin.com/posts/siyran-shafi_chatbotdevelopment-interakt-whatsappbusiness-activity-7333025583414595584-wQ7o" target="_blank">View Project</a></p>
+          </article>
+
+          <!-- Project 05 -->
+          <article class="projects__card swiper-slide" onclick="window.open('https://www.linkedin.com/in/siyran-shafi/details/projects/')" style="cursor:pointer;">
+            <span class="projects__number">05</span>
+            <h3 class="projects__title">Monitoring &amp; Disinfection System</h3>
+            <p class="projects__subtitle">IoT + AI</p>
+            <p class="projects__description">Sensor-driven monitoring &amp; automatic disinfection for public spaces—built during the COVID-19 era.</p>
+            <div class="projects__tech">
+              <i class="devicon-python-plain colored"></i>
+              <i class="ri-cpu-line"></i>
+              <i class="ri-cloud-line"></i>
+              <i class="ri-sensor-line"></i>
+            </div>
+            <p class="projects__cta"><a href="https://www.linkedin.com/in/siyran-shafi/details/projects/" target="_blank">View Project</a></p>
+          </article>
+
+        </div>
+
+        <!-- Swiper controls -->
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"><i class="ri-arrow-left-s-line"></i></div>
+        <div class="swiper-button-next"><i class="ri-arrow-right-s-line"></i></div>
+      </div>
+    </div>
+  </div>
+</section>
+    <!--------------ABC----------------------->
+<!-- Orbit Section -->
+<div class="orbit-container">
+  <div class="orbit-wrapper">
+
+    <!-- Orbit outlines (for visual circles) -->
+    <!-- <div class="orbit-outline" style="width: 100%; height: 100%;"></div>
+    <div class="orbit-outline" style="width: 60%; height: 60%;"></div> -->
+
+    <!-- Outer orbit (slow rotation) -->
+    <div class="orbit outer">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" title="HTML5" class="orbit-icon" style="--angle: 0deg">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" title="CSS3" class="orbit-icon" style="--angle: 20deg">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" title="JavaScript" class="orbit-icon" style="--angle: 40deg">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" title="TypeScript" class="orbit-icon" style="--angle: 60deg">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" title="React" class="orbit-icon" style="--angle: 80deg">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg" title="Vue.js" class="orbit-icon" style="--angle: 100deg">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg" title="Angular" class="orbit-icon" style="--angle: 120deg">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" title="Node.js" class="orbit-icon" style="--angle: 140deg">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" title="Express" class="orbit-icon" style="--angle: 160deg; background:white; border-radius:50%; padding:4px;">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" title="Docker" class="orbit-icon" style="--angle: 180deg">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" title="Git" class="orbit-icon" style="--angle: 200deg">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" title="GitHub" class="orbit-icon" style="--angle: 220deg; background:white; border-radius:50%; padding:4px;">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" title="Linux" class="orbit-icon" style="--angle: 240deg">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" title="MySQL" class="orbit-icon" style="--angle: 260deg">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" title="MongoDB" class="orbit-icon" style="--angle: 280deg">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" title="PostgreSQL" class="orbit-icon" style="--angle: 300deg">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" title="Firebase" class="orbit-icon" style="--angle: 320deg">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" title="Redis" class="orbit-icon" style="--angle: 340deg">
+    </div>
+
+    <!-- Inner orbit (faster reverse rotation) -->
+    <div class="orbit inner">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" title="Python" class="orbit-icon" style="--angle: 0deg">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" title="Flask" class="orbit-icon" style="--angle: 30deg; background:white; border-radius:50%; padding:4px;">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" title="Django" class="orbit-icon" style="--angle: 60deg">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg" title="PyTorch" class="orbit-icon" style="--angle: 90deg">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" title="TensorFlow" class="orbit-icon" style="--angle: 120deg">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/opencv/opencv-original.svg" title="OpenCV" class="orbit-icon" style="--angle: 150deg">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" title="Figma" class="orbit-icon" style="--angle: 180deg">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-line.svg" title="Photoshop" class="orbit-icon" style="--angle: 210deg">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/illustrator/illustrator-line.svg" title="Illustrator" class="orbit-icon" style="--angle: 240deg; background:white; border-radius:50%; padding:4px;">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/canva/canva-original.svg" title="Canva" class="orbit-icon" style="--angle: 270deg">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" title="VS Code" class="orbit-icon" style="--angle: 300deg">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/notion/notion-original.svg" title="Notion" class="orbit-icon" style="--angle: 330deg">
+    </div>
+
+  </div>
+</div>
+
+<style>
+/* === Orbit Container and Layout === */
+.orbit-container {
+  position: absolute;
+  top: 180%;
+  right: -200px;
+  width: 440px;
+  height: 440px;
+  transform: translateY(-50%);
+}
+
+/* Keeps both orbits perfectly centered */
+.orbit-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Orbit outlines (dashed rings) */
+.orbit-outline {
+  position: absolute;
+  border: 1.2px dashed rgba(255,255,255,0.1);
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+
+/* === Animation keyframes === */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes spin-fast {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+/* === Outer & Inner Orbits === */
+.orbit.outer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-origin: center;
+  animation: spin-slow 65s linear infinite;
+}
+
+.orbit.inner {
+  position: absolute;
+  width: 60%;
+  height: 60%;
+  transform-origin: center;
+  animation: spin-fast 45s linear infinite reverse;
+}
+
+/* === ICON STYLING === */
+.orbit-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  transform-origin: center;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* Outer orbit radius (further out for clear spacing) */
+.outer .orbit-icon {
+  transform:
+    rotate(var(--angle))
+    translateX(200px)
+    rotate(calc(-1 * var(--angle)));
+}
+
+/* Inner orbit radius (closer to center) */
+.inner .orbit-icon {
+  transform:
+    rotate(var(--angle))
+    translateX(100px)
+    rotate(calc(-1 * var(--angle)));
+}
+
+/* Hover glow effect */
+.orbit-icon:hover {
+  filter: drop-shadow(0 0 10px #a78bfa) brightness(2);
+  z-index: 10;
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+  .orbit-container {
+    width: 280px;
+    height: 280px;
+    right: 40px;
+  }
+  .outer .orbit-icon {
+    transform: rotate(var(--angle)) translateX(130px) rotate(calc(-1 * var(--angle)));
+  }
+  .inner .orbit-icon {
+    transform: rotate(var(--angle)) translateX(70px) rotate(calc(-1 * var(--angle)));
+  }
+  .orbit-icon {
+    width: 26px;
+    height: 26px;
+  }
+}
+</style>
+
+
+
+    <!--==================== WORK ====================-->
+   <section class="work section" id="work">
+  <style>
+    /* ===== Outer Frame ===== */
+    .work__outer {
+      width: 90%;
+      max-width: 1180px;
+      margin: 2rem auto; /* Center with subtle space above & below */
+      border: 1px solid rgba(167, 139, 250, 0.25);
+      border-radius: 1.2rem;
+      padding: 2rem 2rem 2.5rem;
+      background: rgba(17, 18, 20, 0.92);
+      backdrop-filter: blur(6px);
+    }
+
+    /* Reduce spacing between this and next section */
+    section.work.section {
+      margin-top: 2rem !important;
+      margin-bottom: 2rem !important;
+    }
+
+    /* ===== Section Title ===== */
+    .section__title {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+
+    .section__title span {
+      color: #a78bfa;
+    }
+
+    /* ===== Tabs ===== */
+    .work__tabs {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.2rem;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid rgba(167, 139, 250, 0.15);
+      padding-bottom: 1rem;
+    }
+
+    .work__button {
+      background: none;
+      border: 1px solid transparent;
+      border-radius: 0.6rem;
+      color: #a5a5a5;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      padding: 0.45rem 1rem;
+    }
+
+    .work__button:hover,
+    .work__button.button--active {
+      color: #a78bfa;
+      border-color: #a78bfa;
+      box-shadow: 0 0 10px rgba(167, 139, 250, 0.3);
+    }
+
+    /* ===== Panels ===== */
+    .work__content {
+      display: flex;
+      justify-content: center;
+    }
+
+    .work__panel {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 1.6rem;
+      width: 100%;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    /* ===== Card Styling ===== */
+    .work__item {
+      background: #111214;
+      border: 1px solid rgba(167, 139, 250, 0.2);
+      border-radius: 1rem;
+      padding: 1.6rem 1.4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      transition: all 0.3s ease;
+      height: 100%;
+      min-height: 240px;
+      box-sizing: border-box;
+    }
+
+    .work__item:hover {
+      border-color: #a78bfa;
+      box-shadow: 0 0 18px rgba(167, 139, 250, 0.45);
+      transform: translateY(-6px);
+    }
+
+    /* ===== Text Hierarchy ===== */
+    .work__title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.35rem;
+      line-height: 1.35;
+    }
+
+    .work__subtitle {
+      font-size: 0.9rem;
+      color: #a5a5a5;
+      margin-bottom: 0.35rem;
+      line-height: 1.4;
+    }
+
+    .work__year {
+      font-size: 0.85rem;
+      color: #a78bfa;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      display: inline-block;
+    }
+
+    .work__description {
+      font-size: 0.85rem;
+      color: #ccc;
+      line-height: 1.55;
+      margin-top: auto;
+    }
+
+    /* ===== Alignment & Consistency ===== */
+    .work__item > * {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 768px) {
+      .work__panel {
+        grid-template-columns: 1fr;
+      }
+      .work__tabs {
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+    }
+  </style>
+
+  <div class="work__outer">
+    <div class="container">
+      <h2 class="section__title"><span>My Work</span> <br> Experience</h2>
+
+      <!-- Tabs -->
+      <div class="work__tabs" role="tablist" aria-label="Work sections">
+        <button class="work__button button--active"
+                id="tab-experience"
+                role="tab"
+                aria-selected="true"
+                aria-controls="experience"
+                data-target="#experience">Experience</button>
+
+        <button class="work__button"
+                id="tab-education"
+                role="tab"
+                aria-selected="false"
+                aria-controls="education"
+                data-target="#education">Education</button>
+      </div>
+
+      <!-- Panels -->
+      <div class="work__content">
+        <!-- Experience -->
+        <div class="work__panel" id="experience" role="tabpanel" aria-labelledby="tab-experience">
+          <div class="work__item">
+            <h3 class="work__title">Content Creator Manager</h3>
+            <span class="work__subtitle">Kashmir Care Foundation (KCF): Srinagar</span>
+            <span class="work__year">Sep 2025 : Present</span>
+            <p class="work__description">
+              Lead content strategy & digital engagement across social, web & newsletters; IT support;
+              coordinate Spotlight & Everyday Legend sessions; support monthly virtual events.
+            </p>
+          </div>
+
+          <div class="work__item">
+            <h3 class="work__title">Operations Associate</h3>
+            <span class="work__subtitle">Fix Health: Bengaluru</span>
+            <span class="work__year">Feb 2025 : Present</span>
+            <p class="work__description">
+              Own operational workflows and patient journey coordination; provide data-backed product feedback.
+            </p>
+          </div>
+
+          <div class="work__item">
+            <h3 class="work__title">Technical Operations Executive</h3>
+            <span class="work__subtitle">Fix Health: Bengaluru</span>
+            <span class="work__year">Dec 2023 : Present</span>
+            <p class="work__description">
+              Technical ops, tooling and analytics; process automation and service reliability.
+            </p>
+          </div>
+
+          <div class="work__item">
+            <h3 class="work__title">Student Intern (ML/DL)</h3>
+            <span class="work__subtitle">University of Kashmir</span>
+            <span class="work__year">Jan 2025 : Feb 2025</span>
+            <p class="work__description">
+              4-week internship focused on ML & DL with Python, NumPy/Pandas, scikit-learn, visualization, and neural nets.
+            </p>
+          </div>
+
+          <div class="work__item">
+            <h3 class="work__title">Customer Service / Trip Manager</h3>
+            <span class="work__subtitle">Alp Savy Pvt. Ltd.</span>
+            <span class="work__year">Jan 2020 : Sep 2023</span>
+            <p class="work__description">
+              Manage end-to-end trip operations, vendor coordination, and customer experience.
+            </p>
+          </div>
+
+          <div class="work__item">
+            <h3 class="work__title">Engineer Intern : Data Centre Network & Security</h3>
+            <span class="work__subtitle">JKPDCL (IT & Communication Division)</span>
+            <span class="work__year">Jan 2023 : Feb 2023</span>
+            <p class="work__description">
+              4-week industrial training in data centre networking & security.
+            </p>
+          </div>
+
+          <div class="work__item">
+            <h3 class="work__title">Project Intern : Smart Crop Sensor</h3>
+            <span class="work__subtitle">IIT Ropar : AWaDH</span>
+            <span class="work__year">Jun 2022 : Aug 2022</span>
+            <p class="work__description">
+              Smart crop sensor project for improved fertilizer absorption and efficiency.
+            </p>
+          </div>
+
+          <div class="work__item">
+            <h3 class="work__title">Engineer Intern</h3>
+            <span class="work__subtitle">Gladni Grid Station (220/132/33 KV): Jammu</span>
+            <span class="work__year">Jan 2021 : Feb 2021</span>
+            <p class="work__description">
+              6-week industrial training across grid operations.
+            </p>
+          </div>
+        </div>
+
+        <!-- Education -->
+        <div class="work__panel" id="education" role="tabpanel" aria-labelledby="tab-education" hidden>
+          <div class="work__item">
+            <h3 class="work__title">M.Tech in Artificial Intelligence</h3>
+            <span class="work__subtitle">Islamic University of Science & Technology: Pulwama</span>
+            <span class="work__year">2024 : Present</span>
+            <p class="work__description">
+              AI specialization with coursework in DL, NLP, Agentic AI Systems & Intelligent Automation.
+            </p>
+          </div>
+
+          <div class="work__item">
+            <h3 class="work__title">B.Tech in Electronics & Communication</h3>
+            <span class="work__subtitle">Islamic University of Science & Technology: Pulwama</span>
+            <span class="work__year">2019 : 2023</span>
+            <p class="work__description">
+              Foundations in embedded systems, signal processing, communications & programming.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Tabs functionality
+    const tabButtons = document.querySelectorAll(".work__button");
+    const panels = document.querySelectorAll(".work__panel");
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        tabButtons.forEach(b => {
+          b.classList.remove("button--active");
+          b.setAttribute("aria-selected", "false");
+        });
+        panels.forEach(p => p.hidden = true);
+        btn.classList.add("button--active");
+        btn.setAttribute("aria-selected", "true");
+        const target = document.querySelector(btn.dataset.target);
+        if (target) target.hidden = false;
+      });
+    });
+  </script>
+</section>
+
+
+
+    <!--==================== SERVICES ====================-->
+    <section class="services section" id="services">
+  <style>
+    /* ===== Outer Frame ===== */
+    .services__outer {
+      width: 90%;
+      max-width: 1180px;
+      margin: 2rem auto;
+      border: 1px solid rgba(167, 139, 250, 0.25);
+      border-radius: 1.2rem;
+      padding: 2rem 2rem 2.5rem;
+      background: rgba(17, 18, 20, 0.92);
+      backdrop-filter: blur(6px);
+    }
+
+    /* Reduce spacing between this and next section */
+    section.services.section {
+      margin-top: 2rem !important;
+      margin-bottom: 2rem !important;
+    }
+
+    /* ===== Section Title ===== */
+    .section__title {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 2rem;
+      line-height: 1.2;
+    }
+
+    .section__title span {
+      color: #a78bfa;
+    }
+
+    /* ===== Grid Layout ===== */
+    .services__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.6rem;
+    }
+
+    /* ===== Individual Cards ===== */
+    .services__card {
+      background: #111214;
+      border: 1px solid rgba(167, 139, 250, 0.2);
+      border-radius: 1rem;
+      padding: 1.6rem 1.4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      height: 100%;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    .services__card:hover {
+      border-color: #a78bfa;
+      box-shadow: 0 0 18px rgba(167, 139, 250, 0.45);
+      transform: translateY(-6px);
+    }
+
+    /* ===== Card Text Styling ===== */
+    .services__title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+
+    .services__description {
+      font-size: 0.9rem;
+      color: #ccc;
+      margin-bottom: 1rem;
+      line-height: 1.55;
+    }
+
+    .services__skills {
+      font-size: 0.85rem;
+      color: #a5a5a5;
+      line-height: 1.5;
+    }
+
+    .services__skills b {
+      color: #a78bfa;
+      font-weight: 600;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 768px) {
+      .services__grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <div class="services__outer">
+    <div class="container">
+      <h2 class="section__title">What I <span>Offer</span></h2>
+
+      <div class="services__grid">
+        <!-- Card 1 -->
+        <article class="services__card">
+          <h3 class="services__title">AI Engineer</h3>
+          <p class="services__description">
+            Intelligent systems with LLMs, RAG, agents, and end-to-end automation for real-world workflows.
+          </p>
+          <p class="services__skills">
+            <b>Skills &amp; Tools:</b><br>
+            Python • TensorFlow • PyTorch • LangChain • Gemini API • NLP • CV • Data Analysis
+          </p>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="services__card">
+          <h3 class="services__title">Developer</h3>
+          <p class="services__description">
+            Scalable APIs &amp; apps powering AI features with modern web/mobile stacks.
+          </p>
+          <p class="services__skills">
+            <b>Skills &amp; Tools:</b><br>
+            Flask • FastAPI • Node.js • React • GitHub • AWS • GCP • Flutter
+          </p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!--==================== CERTIFICATIONS ====================-->
+    <!--==================== CERTIFICATIONS ====================-->
+<section class="certifications section" id="certifications">
+  <style>
+    /* ===== Outer Frame ===== */
+    .certs__outer {
+      width: 90%;
+      max-width: 1180px;
+      margin: 2rem auto;
+      border: 1px solid rgba(167, 139, 250, 0.25);
+      border-radius: 1.2rem;
+      padding: 2rem 2rem 2.5rem;
+      background: rgba(17, 18, 20, 0.92);
+      backdrop-filter: blur(6px);
+    }
+
+    /* Reduce spacing between sections */
+    section.certifications.section {
+      margin-top: 2rem !important;
+      margin-bottom: 2rem !important;
+    }
+
+    /* ===== Section Title ===== */
+    .section__title {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 2rem;
+      line-height: 1.2;
+    }
+
+    .section__title span {
+      color: #a78bfa;
+    }
+
+    /* ===== Grid Layout ===== */
+    .certs__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.8rem;
+    }
+
+    /* ===== Individual Certificate Cards ===== */
+    .cert__card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: #111214;
+      border-radius: 1rem;
+      border: 1px solid rgba(167, 139, 250, 0.15);
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+      color: #fff;
+    }
+
+    .cert__card:hover {
+      border: 1px solid #a78bfa;
+      box-shadow: 0 0 15px rgba(167, 139, 250, 0.4);
+      transform: translateY(-5px);
+    }
+
+    /* ===== Certificate Title & Icons ===== */
+    .cert__title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin: 0.3rem 0;
+    }
+
+    .cert__icon i {
+      font-size: 1.3rem;
+      color: #a78bfa;
+    }
+
+    .cert__row {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    /* ===== Badges ===== */
+    .cert__badges span {
+      background: rgba(255,255,255,0.08);
+      padding: 0.25rem 0.6rem;
+      border-radius: 0.5rem;
+      font-size: 0.8rem;
+      color: #e5e5e5;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      margin-right: 0.3rem;
+    }
+
+    /* ===== View Button ===== */
+    .button__ghost {
+      font-size: 0.7rem;
+      padding: 0.25rem 0.8rem;
+      border-radius: 0.4rem;
+      border: 1px solid #a78bfa;
+      color: #a78bfa;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .button__ghost:hover {
+      background: #a78bfa;
+      color: #fff;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 768px) {
+      .certs__grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <div class="certs__outer">
+    <div class="container">
+      <h2 class="section__title">My <span>Certifications</span></h2>
+
+      <div class="certs__grid">
+
+        <!-- 1 -->
+        <article class="cert__card">
+          <div>
+            <div class="cert__row">
+              <span class="cert__icon"><i class="devicon-tensorflow-original colored"></i></span>
+              <h3 class="cert__title">Supervised Machine Learning: Regression and Classification</h3>
+            </div>
+            <div class="cert__badges">
+              <span><i class="devicon-python-plain colored"></i>Python</span>
+              <span><i class="devicon-tensorflow-original colored"></i>TensorFlow</span>
+            </div>
+          </div>
+          <div style="margin-top:auto;display:flex;justify-content:center;">
+            <a class="button__ghost" target="_blank" href="https://coursera.org/share/ad096b7d710802d7b153723b73c92cea">View</a>
+          </div>
+        </article>
+
+        <!-- 2 -->
+        <article class="cert__card">
+          <div>
+            <div class="cert__row">
+               <span class="cert__icon"><i class="devicon-python-plain colored"></i></span>
+              <h3 class="cert__title">Crash Course on Python</h3>
+            </div>
+            <div class="cert__badges">
+  <span>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg"
+         alt="Google"
+         style="height:20px; vertical-align:middle; margin-right:6px;">
+    Google
+  </span>
+  <span><i class="devicon-python-plain colored"></i>Python</span>
+</div>
+
+          </div>
+          <div style="margin-top:auto;display:flex;justify-content:center;">
+            <a class="button__ghost" target="_blank" href="https://coursera.org/share/b44495a410590765463cfa94d6e72ee2">View</a>
+          </div>
+        </article>
+
+        <!-- 3 -->
+        <article class="cert__card">
+          <div>
+            <div class="cert__row">
+              <span class="cert__icon"><i class="devicon-flutter-plain colored"></i></span>
+              <h3 class="cert__title">Flutter and Dart (IBM)</h3>
+            </div>
+            <div class="cert__badges">
+              <span><i class="devicon-flutter-plain colored"></i>Flutter</span>
+              <span><i class="devicon-dart-plain colored"></i>Dart</span>
+            </div>
+          </div>
+          <div style="margin-top:auto;display:flex;justify-content:center;">
+            <a class="button__ghost" target="_blank" href="https://coursera.org/share/ccf7e9ccbdd10c7de063842f11b6499c">View</a>
+          </div>
+        </article>
+
+        <!-- 4 -->
+        <article class="cert__card">
+          <div>
+            <div class="cert__row">
+              <span class="cert__icon"><i class="devicon-tensorflow-original colored"></i></span>
+              <h3 class="cert__title">Unsupervised Learning, Recommenders & RL</h3>
+            </div>
+            <div class="cert__badges">
+              <span><i class="devicon-tensorflow-original colored"></i>TensorFlow</span>
+              <span><i class="devicon-python-plain colored"></i>Python</span>
+            </div>
+          </div>
+          <div style="margin-top:auto;display:flex;justify-content:center;">
+            <a class="button__ghost" target="_blank" href="https://coursera.org/share/9babfc3eb24f799f7613ae0094b335d8">View</a>
+          </div>
+        </article>
+
+        <!-- 5 -->
+        <article class="cert__card">
+          <div>
+            <div class="cert__row">
+              <span class="cert__icon"><i class="devicon-amazonwebservices-original colored"></i></span>
+              <h3 class="cert__title">Computer Vision using Python</h3>
+            </div>
+            <div class="cert__badges">
+  <span><i class="devicon-opencv-plain colored"></i>Computer Vision</span>
+  <span><i class="devicon-python-plain colored"></i>Python</span>
+</div>
+
+          </div>
+          <div style="margin-top:auto;display:flex;justify-content:center;">
+            <a class="button__ghost" target="_blank" href="https://www.udemy.com/certificate/UC-6d93433b-6a64-4364-be15-2a9c92afd7f9/">View</a>
+          </div>
+        </article>
+
+        <!-- 6 -->
+        <article class="cert__card">
+          <div>
+            <div class="cert__row">
+              <span><i class="devicon-oracle-original colored"></i></span>
+              <h3 class="cert__title">OCI Generative AI Professional</h3>
+            </div>
+            <div class="cert__badges">
+              <span><i class="ri-links-line"></i>LangChain</span>
+              <span><i class="ri-robot-2-line"></i>LLMs</span>
+            </div>
+          </div>
+          <div style="margin-top:auto;display:flex;justify-content:center;">
+            <a class="button__ghost" target="_blank" href="https://catalog-education.oracle.com/ords/certview/sharebadge?id=0B210A3095EA7785D5834A0C9AC8A49B69EBE777A32840D5926EC17F0EF53936">View</a>
+          </div>
+        </article>
+
+        <!-- 7 -->
+        <article class="cert__card">
+          <div>
+            <div class="cert__row">
+              <span class="cert__icon"><i class="devicon-flask-original colored"></i></span>
+              <h3 class="cert__title">AI-Powered Chatbots & Automation</h3>
+            </div>
+            <div class="cert__badges">
+              <span><i class="devicon-flask-original colored"></i>Flask</span>
+              <span><i class="ri-links-line"></i>LangChain</span>
+            </div>
+          </div>
+          <div style="margin-top:auto;display:flex;justify-content:center;">
+            <a class="button__ghost" target="_blank" href="https://www.udemy.com/certificate/UC-11f78c3e-ce09-42af-baa4-91d9e13a69f0/">View</a>
+          </div>
+        </article>
+
+        <!-- 8 -->
+        <article class="cert__card">
+          <div>
+            <div class="cert__row">
+                <span><i class="devicon-photoshop-plain colored"></i></span>
+              <h3 class="cert__title">Adobe Photoshop CC</h3>
+            </div>
+            <div class="cert__badges">
+  <span><i class="devicon-photoshop-plain colored"></i>Photoshop</span>
+  <span><i class="devicon-adobe-plain colored"></i>Adobe</span>
+</div>
+
+          </div>
+          <div style="margin-top:auto;display:flex;justify-content:center;">
+            <a class="button__ghost" target="_blank" href="https://www.linkedin.com/in/siyran-shafi">View</a>
+          </div>
+        </article>
+
+        <!-- 9 -->
+
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    <!--==================== TESTIMONIALS ====================-->
+    <!--==================== TESTIMONIALS ====================-->
+<section class="testimonials section" id="testimonials">
+  <style>
+    /* ===== Outer Frame ===== */
+    #testimonials .testimonials__outer {
+      max-width: 900px;
+      margin: 0 auto;
+      border: 1px solid rgba(167, 139, 250, 0.25);
+      border-radius: 1rem;
+      padding: 3rem 2rem;
+      background: rgba(17, 18, 20, 0.92);
+      backdrop-filter: blur(6px);
+      text-align: center;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #testimonials .section__title {
+      margin-bottom: 2rem;
+      text-align: center;
+      line-height: 1.3;
+    }
+
+    /* ===== Swiper Container ===== */
+    #testimonials .testimonials__container {
+      width: 100%;
+      max-width: 750px;
+      overflow: hidden;
+      position: relative;
+      margin: 0 auto;
+      padding: 1rem 0;
+    }
+
+    #testimonials .swiper-slide {
+      display: flex !important;
+      justify-content: center;
+      align-items: center;
+      width: 100% !important;
+      height: auto;
+      min-height: 200px;
+    }
+
+    /* ===== Testimonial Card ===== */
+    #testimonials .testimonial__card {
+      background: #111214;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 0.75rem;
+      padding: 2rem 2.2rem;
+      color: #fff;
+      text-align: center;
+      width: 90%;
+      max-width: 650px;
+      opacity: 0;
+      transform: translateY(30px) scale(0.96);
+      transition: opacity 1s ease, transform 1s ease;
+      margin: 0 auto;
+    }
+
+    /* ===== Active card animation ===== */
+    #testimonials .swiper-slide-active .testimonial__card {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* ===== Text Styling ===== */
+    #testimonials .testimonial__title {
+      color: #a78bfa;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+      font-size: 1.1rem;
+    }
+
+    #testimonials .testimonial__affiliation {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #b8b8b8;
+      margin-top: 0;
+      margin-bottom: 1.2rem; /* more gap before testimonial text */
+    }
+
+    #testimonials .testimonial__text {
+      font-style: italic;
+      font-size: 1rem;
+      color: #ddd;
+      line-height: 1.6;
+      margin: 0 auto;
+      max-width: 580px;
+    }
+
+    /* ===== View Email Button ===== */
+    #testimonials .testimonial__actions {
+      margin-top: 1.4rem;
+    }
+
+    #testimonials .testimonial__button {
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 0.4rem 0.9rem;
+      border-radius: 0.4rem;
+      border: 1px solid #a78bfa;
+      color: #a78bfa;
+      text-decoration: none;
+      transition: all 0.25s ease;
+    }
+
+    #testimonials .testimonial__button:hover {
+      background: #a78bfa;
+      color: #111214;
+      transform: scale(1.05);
+      box-shadow: 0 0 8px rgba(167, 139, 250, 0.4);
+    }
+
+    /* ===== Pagination styling ===== */
+    #testimonials .swiper-pagination {
+      margin-top: 2rem;
+      text-align: center;
+      position: relative;
+    }
+
+    #testimonials .swiper-pagination-bullet {
+      background: #a78bfa !important;
+      opacity: 0.3;
+      transition: all 0.3s ease;
+      width: 10px;
+      height: 10px;
+    }
+
+    #testimonials .swiper-pagination-bullet-active {
+      background: #a78bfa !important;
+      opacity: 1;
+      transform: scale(1.3);
+      box-shadow: 0 0 6px #a78bfa;
+    }
+  </style>
+
+  <div class="testimonials__outer">
+    <h2 class="section__title">
+      What They Say <br><span>About Me</span>
+    </h2>
+
+    <div class="testimonials__container swiper">
+      <div class="swiper-wrapper">
+        <!-- Testimonial 1 -->
+        <div class="swiper-slide">
+          <article class="testimonial__card">
+            <h3 class="testimonial__title">Dr. Syed Wajid Aaalam</h3>
+            <h4 class="testimonial__affiliation">Assistant Professor, Centre for AI, IUST</h4>
+            <p class="testimonial__text">
+              "Abrar Ahmad is a skilled and knowledgeable student with a strong understanding of Artificial Intelligence. He has worked on several AI and social impact projects and is known for his good communication skills and dedication to meeting project requirements. He also demonstrates versatility with additional skills in designing, video editing, and other creative fields."
+            </p>
+            <div class="testimonial__actions">
+              <a href="mailto:sdwjd51@gmail.com" class="testimonial__button">View Email</a>
+            </div>
+          </article>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="swiper-slide">
+          <article class="testimonial__card">
+            <h3 class="testimonial__title">Dr. M Abdul Jawaad</h3>
+            <h4 class="testimonial__affiliation">Assistant Professor, Centre for AI, IUST</h4>
+            <p class="testimonial__text">
+              “Abrar is a truly sincere, curious, and hardworking individual with a genuine passion for learning. He is a quick learner with excellent programming and communication skills and has been a great help to both peers and faculty. His dedication to growth and collaboration reflects a professional mindset and a commendable attitude toward learning.”
+            </p>
+            <div class="testimonial__actions">
+              <a href="mailto:abduljawad12@gmail.com" class="testimonial__button">View Email</a>
+            </div>            
+          </article>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="swiper-slide">
+          <article class="testimonial__card">
+            <h3 class="testimonial__title">Mr. Abdul Naffi Ahanger</h3>
+            <h4 class="testimonial__affiliation">Assistant Professor, Centre for AI, IUST</h4>
+            <p class="testimonial__text">
+              "Abrar is not only academically skilled but also a polite, respectful, and cooperative individual.
+              His teamwork, communication skills, and positive attitude make him well-suited for both academic and professional environments."
+            </p>
+            <div class="testimonial__actions">
+              <a href="mailto:abdulnaffi@iust.ac.in" class="testimonial__button">View Email</a>
+            </div>
+          </article>
+        </div>
+        <!-- Testimonial  4-->
+        <div class="swiper-slide">
+          <article class="testimonial__card">
+            <h3 class="testimonial__title">Amir Mushtaq</h3>
+            <h4 class="testimonial__affiliation">Project Collabrator</h4>
+            <p class="testimonial__text">
+ "Abrar stands out for his sincerity and dedication. He approaches every task with focus and positivity, always making sure things get done the right way. What truly makes him special is his ability to bring calm and confidence to those around him. You always feel supported when he is on your team. He is dependable, kind, and consistently gives his best in everything he does."
+            </p>
+            <div class="testimonial__actions">
+              <a href="mailto:idaretoshare99@gmail.com" class="testimonial__button">View Email</a>
+            </div>
+          </article>
+        </div>
+        <!-- Testimonial  5-->
+        <div class="swiper-slide">
+          <article class="testimonial__card">
+            <h3 class="testimonial__title">Aiymun Gull</h3>
+            <h4 class="testimonial__affiliation">Project Collabrator</h4>
+            <p class="testimonial__text">
+ "Abrar is a dedicated learner with strong skills and passion for AI .
+I have always found him to be highly motivated , and helping others like me in every possible way"
+            </p>
+             <div class="testimonial__actions">
+              <a href="mailto:aiymunbhat@gmail.com" class="testimonial__button">View Email</a>
+            </div>
+          </article>
+        </div>
+
+        <!-- Testimonial  6-->
+        <div class="swiper-slide">
+          <article class="testimonial__card">
+            <h3 class="testimonial__title">Iflah Shafi</h3>
+            <h4 class="testimonial__affiliation">Project Collabrator</h4>
+            <p class="testimonial__text">
+“I’ve had the pleasure of studying alongside Abrar, whose passion for Artificial Intelligence and problem-solving is truly inspiring. What stands out most is his willingness to help others and bring positive energy to every discussion. I’m confident he will continue to excel and make meaningful contributions in every field he works in."
+            </p>
+             <div class="testimonial__actions">
+              <a href="mailto:iflahshafi03@gmail.com" class="testimonial__button">View Email</a>
+            </div>
+          </article>
+        </div>
+        <!-- Testimonial  7-->
+        <div class="swiper-slide">
+          <article class="testimonial__card">
+            <h3 class="testimonial__title">Kinjal Kulmethe</h3>
+            <h4 class="testimonial__affiliation">FixHealth Colleague</h4>
+            <p class="testimonial__text">
+“Abrar is someone you can always count on. He listens, communicates well, and is always ready to help working with him has genuinely been comfortable and easy."
+            </p>
+             <div class="testimonial__actions">
+              <a href="mailto:Kinjalkulmethe@gmail.com" class="testimonial__button">View Email</a>
+            </div>
+          </article>
+        </div>
+        <!-- Testimonial  8-->
+        <div class="swiper-slide">
+          <article class="testimonial__card">
+            <h3 class="testimonial__title">Maharan Shafat Shah</h3>
+            <h4 class="testimonial__affiliation">Student</h4>
+            <p class="testimonial__text">
+"You are truly an inspiring senior with incredible programming skills and a great understanding of AI. Your calm and creative nature, along with the way he helps us clear our doubts so patiently, truly makes you a role model for all of us."
+             <div class="testimonial__actions">
+              <a href="mailto:Kinjalkulmethe@gmail.com" class="testimonial__button">View Email</a>
+            </div>
+          </article>
+        </div>
+
+
+
+
+
+
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </div>
+
+  <script>
+    new Swiper("#testimonials .testimonials__container", {
+      slidesPerView: 1,
+      centeredSlides: true,
+      loop: true,
+      effect: "slide",
+      spaceBetween: 0,
+      pagination: {
+        el: "#testimonials .swiper-pagination",
+        clickable: true,
+      },
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+      },
+      speed: 900,
+      on: {
+        slideChangeTransitionStart(swiper) {
+          swiper.slides.forEach(slide => {
+            const card = slide.querySelector(".testimonial__card");
+            if (card) card.style.opacity = "0";
+          });
+        },
+        slideChangeTransitionEnd(swiper) {
+          const activeCard = swiper.slides[swiper.activeIndex].querySelector(".testimonial__card");
+          if (activeCard) {
+            activeCard.style.opacity = "1";
+            activeCard.style.transform = "translateY(0) scale(1)";
+          }
+        },
+      },
+    });
+  </script>
+</section>
+
+    <!--==================== CONTACT ====================-->
+<section class="contact section" id="contact">
+  <div class="container">
+    <h2 class="section__title">Write Me &amp; We'll Talk</h2>
+
+    <!-- Single-row actions -->
+    <div class="contact__buttons">
+      <a class="button button__ghost" href="https://api.whatsapp.com/send?phone=918899028512&text=Hello%2C%20interested%20in%20collaborating!" target="_blank" rel="noreferrer">
+        <i class="ri-whatsapp-line"></i> WhatsApp
+      </a>
+
+      <!-- Copy email lives in the SAME row -->
+      <button class="button" id="copyEmail" type="button">
+        <i class="ri-file-copy-line"></i> Copy email
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Copy to clipboard -->
+<script>
+  (function () {
+    const btn = document.getElementById('copyEmail');
+    if (!btn) return;
+    const EMAIL = 'abrarsiyran@gmail.com';
+    btn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(EMAIL);
+        const old = btn.innerHTML;
+        btn.innerHTML = '<i class="ri-check-line"></i> Copied!';
+        setTimeout(() => (btn.innerHTML = old), 1200);
+      } catch (_) {
+        // fallback
+        const t = document.createElement('input');
+        t.value = EMAIL; document.body.appendChild(t); t.select();
+        document.execCommand('copy'); t.remove();
+        const old = btn.innerHTML;
+        btn.innerHTML = '<i class="ri-check-line"></i> Copied!';
+        setTimeout(() => (btn.innerHTML = old), 1200);
+      }
+    });
+  })();
+</script>
+
+  <!--==================== FOOTER ====================-->
+  <footer class="footer grid">
+    <p class="footer__copy">All Rights Reserved By <span>Abrar Ahmad</span></p>
+    <p class="footer__year">&#169; 2025</p>
+  </footer>
+
+  <!--=============== SCROLLREVEAL ===============-->
+  <script src="assets/js/scrollreveal.min.js"></script>
+
+  <!--=============== ANIME JS ===============-->
+  <script src="https://cdn.jsdelivr.net/npm/animejs/lib/anime.iife.min.js"></script>
+
+  <!--=============== SWIPER JS ===============-->
+  <script src="assets/js/swiper-bundle.min.js"></script>
+
+  <!--=============== MAIN JS ===============-->
+  <script src="assets/js/main.js"></script>
+
+  <!-- Inline helpers -->
+  <script>
+    // Accessible Work tab toggle (Experience/Education) + keyboard nav
+    (function () {
+      const tablist = document.querySelector('.work__tabs');
+      const tabs = Array.from(document.querySelectorAll('.work__tabs .work__button'))
+        .map(btn => {
+          if (!btn.hasAttribute('role')) btn.setAttribute('role', 'tab');
+          if (!btn.id) btn.id = 'tab-' + Math.random().toString(36).slice(2);
+          return btn;
+        });
+      const panels = Array.from(document.querySelectorAll('.work__panel'));
+      const getPanelFor = (btn) => {
+        const targetSel = btn.getAttribute('data-target') || ('#' + btn.getAttribute('aria-controls'));
+        return document.querySelector(targetSel);
+      };
+      function activate(btn) {
+        tabs.forEach(t => {
+          t.classList.remove('button--active');
+          t.setAttribute('aria-selected', 'false');
+          t.setAttribute('tabindex', '-1');
+        });
+        panels.forEach(p => p.hidden = true);
+        const panel = getPanelFor(btn);
+        if (panel) panel.hidden = false;
+        btn.classList.add('button--active');
+        btn.setAttribute('aria-selected', 'true');
+        btn.removeAttribute('tabindex');
+      }
+      tabs.forEach(btn => btn.addEventListener('click', () => activate(btn)));
+      if (tablist) {
+        tablist.addEventListener('keydown', (e) => {
+          const idx = tabs.indexOf(document.activeElement);
+          if (idx === -1) return;
+          if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); activate(tabs[(idx+1)%tabs.length]); tabs[(idx+1)%tabs.length].focus(); }
+          if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); activate(tabs[(idx-1+tabs.length)%tabs.length]); tabs[(idx-1+tabs.length)%tabs.length].focus(); }
+          if (e.key === 'Home') { e.preventDefault(); activate(tabs[0]); tabs[0].focus(); }
+          if (e.key === 'End') { e.preventDefault(); activate(tabs[tabs.length-1]); tabs[tabs.length-1].focus(); }
+        });
+      }
+      const initial = document.querySelector('.work__button[aria-selected="true"]') || tabs[0];
+      if (initial) activate(initial);
+    })();
+
+    // Copy email button
+    (function(){
+      const copyBtn = document.querySelector('.contact__button[data-copy]');
+      if (!copyBtn) return;
+      copyBtn.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(copyBtn.getAttribute('data-copy'));
+          copyBtn.innerHTML = '<i class="ri-check-line"></i> Copied!';
+          setTimeout(() => (copyBtn.innerHTML = '<i class="ri-file-copy-line"></i> Copy email'), 1500);
+        } catch {
+          const email = copyBtn.getAttribute('data-copy');
+          const temp = document.createElement('input');
+          temp.value = email;
+          document.body.appendChild(temp);
+          temp.select();
+          document.execCommand('copy');
+          document.body.removeChild(temp);
+          copyBtn.innerHTML = '<i class="ri-check-line"></i> Copied!';
+          setTimeout(() => (copyBtn.innerHTML = '<i class="ri-file-copy-line"></i> Copy email'), 1500);
+        }
+      });
+    })();
+  </script>
+
+  <script>
+  // Inline Typewriter
+  (function(){
+    function startTypewriter(){
+      var el = document.getElementById('home-rotating');
+      if(!el) return;
+      var roles = [
+        "AI Engineer & Developer",
+        "Turning Data into Vision",
+        "AI & ML Professional",
+        "M.Tech Artificial Intelligence"
+      ];
+      var i = 0, j = 0, deleting = false, pause = 0;
+      function tick(){
+        var full = roles[i];
+        if(pause > 0){ pause--; return setTimeout(tick, 60); }
+        if(!deleting){
+          j++;
+          el.textContent = full.slice(0, j);
+          if(j === full.length){ deleting = true; pause = 15; }
+        } else {
+          j--;
+          el.textContent = full.slice(0, j);
+          if(j === 0){ deleting = false; i = (i + 1) % roles.length; pause = 5; }
+        }
+        setTimeout(tick, deleting ? 45 : 70);
+      }
+      tick();
+    }
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", startTypewriter);
+    } else {
+      startTypewriter();
+    }
+  })();
+  </script>
+
+  <script>
+    // Single, guarded Swiper initialization
+    (function(){
+      function initSwiperOnce(container, options){
+        const el = document.querySelector(container);
+        if (!el || typeof Swiper === 'undefined') return;
+        if (el.dataset.initialized === 'true') return;
+        new Swiper(container, options);
+        el.dataset.initialized = 'true';
+      }
+      function initAll(){
+        initSwiperOnce('.projects__container', {
+          loop: true,
+          slidesPerView: 1,
+          spaceBetween: 24,
+          pagination: { el: '.projects .swiper-pagination', clickable: true },
+          navigation: {
+            nextEl: '.projects .swiper-button-next',
+            prevEl: '.projects .swiper-button-prev'
+          },
+          breakpoints: { 768:{slidesPerView:2}, 1024:{slidesPerView:3} },
+          autoplay: { delay: 2600, disableOnInteraction: false },
+          speed: 650
+        });
+        initSwiperOnce('.testimonials__container', {
+          loop: true,
+          autoHeight: true,
+          pagination: { el: '.testimonials .swiper-pagination', clickable: true },
+          autoplay: { delay: 3000, disableOnInteraction: false },
+          speed: 600
+        });
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initAll);
+      } else {
+        initAll();
+      }
+    })();
+  </script>
+</body>
+</html>
