@@ -545,6 +545,7 @@
   width: 440px;
   height: 440px;
   transform: translateY(-50%);
+  pointer-events: none;
 }
 
 /* Keeps both orbits perfectly centered */
@@ -626,12 +627,34 @@
   z-index: 10;
 }
 
-/* === Responsive === */
+/* === Responsive breakpoints === */
+@media (max-width: 1024px) {
+  .orbit-container {
+    position: relative;
+    inset: auto;
+    margin: 2.5rem auto 3rem;
+    transform: none;
+    width: min(420px, 92vw);
+    height: auto;
+    aspect-ratio: 1 / 1;
+    right: auto;
+    pointer-events: auto;
+  }
+  .outer .orbit-icon {
+    transform: rotate(var(--angle)) translateX(160px) rotate(calc(-1 * var(--angle)));
+  }
+  .inner .orbit-icon {
+    transform: rotate(var(--angle)) translateX(90px) rotate(calc(-1 * var(--angle)));
+  }
+  .orbit-icon {
+    width: 30px;
+    height: 30px;
+  }
+}
+
 @media (max-width: 768px) {
   .orbit-container {
-    width: 280px;
-    height: 280px;
-    right: 40px;
+    width: min(320px, 90vw);
   }
   .outer .orbit-icon {
     transform: rotate(var(--angle)) translateX(130px) rotate(calc(-1 * var(--angle)));
@@ -642,6 +665,23 @@
   .orbit-icon {
     width: 26px;
     height: 26px;
+  }
+}
+
+@media (max-width: 480px) {
+  .orbit-container {
+    width: min(260px, 88vw);
+    margin: 2rem auto;
+  }
+  .outer .orbit-icon {
+    transform: rotate(var(--angle)) translateX(110px) rotate(calc(-1 * var(--angle)));
+  }
+  .inner .orbit-icon {
+    transform: rotate(var(--angle)) translateX(58px) rotate(calc(-1 * var(--angle)));
+  }
+  .orbit-icon {
+    width: 22px;
+    height: 22px;
   }
 }
 </style>
