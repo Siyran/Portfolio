@@ -545,7 +545,7 @@
   width: 440px;
   height: 440px;
   transform: translateY(-50%);
-  pointer-events: none;
+  pointer-events: auto; /* allow hover/click on desktop */
 }
 
 /* Keeps both orbits perfectly centered */
@@ -564,6 +564,7 @@
   border: 1.2px dashed rgba(255,255,255,0.1);
   border-radius: 50%;
   box-sizing: border-box;
+  pointer-events: none; /* keep ring from blocking hover */
 }
 
 /* === Animation keyframes === */
@@ -583,6 +584,7 @@
   height: 100%;
   transform-origin: center;
   animation: spin-slow 65s linear infinite;
+  pointer-events: none;
 }
 
 .orbit.inner {
@@ -591,6 +593,7 @@
   height: 60%;
   transform-origin: center;
   animation: spin-fast 45s linear infinite reverse;
+  pointer-events: none;
 }
 
 /* === ICON STYLING === */
@@ -603,6 +606,7 @@
   object-fit: contain;
   transform-origin: center;
   transition: transform 0.3s ease, filter 0.3s ease;
+  pointer-events: auto; /* make icons hoverable */
 }
 
 /* Outer orbit radius (further out for clear spacing) */
