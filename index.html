@@ -1835,43 +1835,6 @@ I have always found him to be highly motivated , and helping others like me in e
   </script>
 
   <script>
-  // Inline Typewriter
-  (function(){
-    function startTypewriter(){
-      var el = document.getElementById('home-rotating');
-      if(!el) return;
-      var roles = [
-        "AI Engineer & Developer",
-        "Turning Data into Vision",
-        "AI & ML Professional",
-        "M.Tech Artificial Intelligence"
-      ];
-      var i = 0, j = 0, deleting = false, pause = 0;
-      function tick(){
-        var full = roles[i];
-        if(pause > 0){ pause--; return setTimeout(tick, 60); }
-        if(!deleting){
-          j++;
-          el.textContent = full.slice(0, j);
-          if(j === full.length){ deleting = true; pause = 15; }
-        } else {
-          j--;
-          el.textContent = full.slice(0, j);
-          if(j === 0){ deleting = false; i = (i + 1) % roles.length; pause = 5; }
-        }
-        setTimeout(tick, deleting ? 45 : 70);
-      }
-      tick();
-    }
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", startTypewriter);
-    } else {
-      startTypewriter();
-    }
-  })();
-  </script>
-
-  <script>
     // Single, guarded Swiper initialization
     (function(){
       function initSwiperOnce(container, options){

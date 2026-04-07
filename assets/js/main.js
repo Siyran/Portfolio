@@ -43,33 +43,44 @@ if (navToggle && navMenu){
 (function(){
   const el = document.getElementById('home-rotating');
   if(!el) return;
+
   const roles = [
     "AI Engineer & Developer",
     "Turning Data into Vision",
     "AI & ML Professional",
     "M.Tech Artificial Intelligence"
   ];
-  let i = 0, j = 0, deleting = false;
+
+  let roleIndex = 0;
+  let cursor = 0;
+  let deleting = false;
+
+  const TYPE_DELAY = 70;    // ms per character while typing
+  const ERASE_DELAY = 42;   // ms per character while deleting
+  const HOLD_DELAY = 1100;  // pause when a word is fully typed
+  const GAP_DELAY = 400;    // pause before typing the next word
 
   function tick(){
-    const full = roles[i];
-    if(!deleting){
-      j++;
-      el.textContent = full.slice(0, j);
-      if(j === full.length){
-        deleting = true;
-        setTimeout(tick, 1200); // pause at end
-        return;
-      }
-    } else {
-      j--;
-      el.textContent = full.slice(0, j);
-      if(j === 0){
-        deleting = false;
-        i = (i + 1) % roles.length;
-      }
+    const text = roles[roleIndex];
+
+    // move cursor
+    cursor += deleting ? -1 : 1;
+    el.textContent = text.slice(0, cursor);
+
+    // choose next delay
+    if (!deleting && cursor === text.length){
+      deleting = true;
+      return setTimeout(tick, HOLD_DELAY);
     }
-    setTimeout(tick, deleting ? 45 : 70);
+    if (deleting && cursor === 0){
+      deleting = false;
+      roleIndex = (roleIndex + 1) % roles.length;
+      return setTimeout(tick, GAP_DELAY);
+    }
+
+    setTimeout(tick, deleting ? ERASE_DELAY : TYPE_DELAY);
   }
-  tick();
+
+  // slight lead-in so first draw doesn't feel abrupt
+  setTimeout(tick, 250);
 })();

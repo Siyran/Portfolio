@@ -293,8 +293,13 @@ ul { list-style: none; }
   white-space: nowrap;
   overflow: hidden;
   min-height: 1.6em;
+  animation: blink-caret .9s steps(1) infinite;
 }
 .home__roles { margin-top: .5rem; color: var(--text-color-dim); font-weight: 700; }
+
+@keyframes blink-caret {
+  50% { border-color: transparent; }
+}
 
 /* RESPONSIVENESS */
 @media (max-width:1024px){
