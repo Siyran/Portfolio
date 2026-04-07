@@ -328,7 +328,12 @@ ul { list-style: none; }
     font-size: 1rem;
   }
   .nav__actions{
-    display:none;
+    display:flex;
+    align-items:center;
+    gap:.6rem;
+  }
+  .nav__actions .button{
+    display:none;  /* hide Hire Me button on mobile, keep toggle visible */
   }
   .nav{height:auto; padding:0.75rem 0;}
 }
